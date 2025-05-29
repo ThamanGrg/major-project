@@ -19,8 +19,8 @@ def process_text():
         if not user_input:
             return jsonify({"error": "No text provided"}), 400
 
-        if re.search(r"\b(what is your name|your name)\b(?!\s+\w)", user_input.strip(), re.IGNORECASE):
-            ai_response = "My name is lily. I am a voice assistant based on a ollama created by a Thaman Gurung."
+        if re.search(r"\b(what is your name|your name|who are you)\b(?!\s+\w)", user_input.strip(), re.IGNORECASE):
+            ai_response = "My name is lily. I am a voice assistant based on a ollama."
         
         elif "exit" in user_input:
             if (hour <= 2 or hour > 20):

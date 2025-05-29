@@ -343,9 +343,11 @@ main {
     }
 
     .ai-avatar {
+        width: 90rem;
+        height: 90rem;
         scale: 0.4;
-        top: -20%;
-        right: 2%;
+        top: -25%;
+        right: -20%;
     }
 
     .blob {
@@ -414,6 +416,10 @@ main {
 
     .ai-avatar {
         scale: 0.4;
+        width: 48rem;
+        height: 54rem;
+        top: -20%;
+        right: -40%;
     }
 
     .blob {
@@ -437,7 +443,7 @@ main {
 }
 
 @media (min-width: 1200px) {
-    .blob{
+    .blob {
         width: 10rem;
         height: 10rem;
     }
