@@ -3,6 +3,8 @@ from flask_cors import CORS
 import ollama
 import datetime
 import re
+import requests
+import pywhatkit
 
 app = Flask(__name__)
 CORS(app)
@@ -19,21 +21,107 @@ def process_text():
         if not user_input:
             return jsonify({"error": "No text provided"}), 400
 
-        if re.search(r"\b(what is your name|your name|who are you)\b(?!\s+\w)", user_input.strip(), re.IGNORECASE):
-            ai_response = "My name is lily. I am a voice assistant based on a ollama."
-        
-        elif "exit" in user_input:
-            if (hour <= 2 or hour > 20):
-                ai_response = "Good night. Incase you need any help, feel free to ask me."
-            else:
-                ai_response = "Bye. If you need any help feel free to ask. Have a great day."
+        user_input_lower = user_input.lower()
 
-        elif "time now" in user_input or "current time" in user_input:
-            timeNow = datetime.datetime.now()
-            ai_response = f"The current date and time is: {timeNow}"
+        def extract_city(user_text):
+            for keyword in ['in', 'of', 'at']:
+                match = re.search(rf'\b{keyword}\s+([A-Za-z\s]+)', user_text, re.IGNORECASE)
+                if match:
+                    return match.group(1).strip()
+            if "my area" in user_text.lower():
+                return "Pokhara"
+            return None
+
+        if re.search(r"\b(what is your name|your name|who are you)\b(?!\s+\w)", user_input.strip(), re.IGNORECASE):
+            response = ollama.chat(
+                model="llama3.2",
+                messages=[{"role": "user", "content": "user asked your name or who are you, your name is Lily. Respond in a friendly way in short"}]
+            )
+            ai_response = response.get("message", {}).get("content", "No response from AI")
+
+        elif "exit" in user_input_lower:
+            if (hour <= 2 or hour > 20):
+                ai_response = "Good night. In case you need any help, feel free to ask me."
+            else:
+                ai_response = "Bye. If you need any help, feel free to ask. Have a great day."
+
+        elif "time now" in user_input_lower or "current time" in user_input_lower:
+            time_now = datetime.datetime.now()
+            ai_response = f"The current date and time is: {time_now}"
+
+        elif "weather" in user_input_lower or "temperature" in user_input_lower or "outdoor" in user_input_lower or "outside" in user_input_lower:
+            is_current_weather_request = (
+                any(keyword in user_input_lower for keyword in ["weather", "temperature", "outdoor", "outside"])
+                and (
+                    "in " in user_input_lower
+                    or "my area" in user_input_lower
+                    or "right now" in user_input_lower
+                )
+            )
+            is_weather_explanation = (
+                any(keyword in user_input_lower for keyword in ["how", "why", "what"])
+                and "weather" in user_input_lower
+            )
+
+            if is_current_weather_request:
+                city = extract_city(user_input)
+                if not city:
+                    city = "Pokhara"
+
+                print("Extracted city:", city)
+                try:
+                    api_request = requests.get(
+                        f"https://api.weatherapi.com/v1/current.json?key=2b7ba4ca5d47461798b41048250706&q={city}",
+                        timeout=5
+                    )
+                    api_request.raise_for_status()
+                    weather_data = api_request.json()
+                    temp_c = weather_data['current']['temp_c']
+                    condition = weather_data['current']['condition']['text']
+                    weather = f"Temperature: {temp_c}°C, Condition: {condition}"
+                except requests.RequestException:
+                    weather = "Sorry, I couldn't fetch the weather information due to a network issue."
+                except Exception as e:
+                    weather = "Something went wrong while fetching the weather."
+
+                prompt = (
+                    f"Hey! Here's the latest weather update for {city}: {weather}. "
+                    f"Please respond in a short, friendly, and helpful tone with a quick tip if needed."
+                )
+
+                response = ollama.chat(
+                    model="llama3.2",
+                    messages=[{"role": "user", "content": prompt}]
+                )
+                ai_response = response.get("message", {}).get("content", "No response from AI")
+
+            elif is_weather_explanation:
+                prompt = f"User asked: '{user_input}'. Provide a simple and friendly explanation."
+                response = ollama.chat(
+                    model="llama3.2",
+                    messages=[{"role": "user", "content": prompt}]
+                )
+                ai_response = response.get("message", {}).get("content", "No response from AI")
+            else:
+                ai_response = "Could you please clarify your weather-related question?"
+
+        elif "play" in user_input_lower and ("youtube" in user_input_lower or "yt" in user_input_lower):
+            match = re.search(r'play\s+(.+?)\s+(?:on|in)\s+(?:youtube|yt)', user_input_lower)
+            if match:
+                video_name = match.group(1).strip()
+                pywhatkit.playonyt(video_name)
+
+        elif "search" in user_input_lower:
+            match = re.search(r'search\s+(.+)', user_input_lower)
+            if match:
+                query = match.group(1).strip()
+                pywhatkit.search(query)
 
         else:
-            response = ollama.chat(model="llama3.2", messages=[{"role": "user", "content": user_input}])
+            response = ollama.chat(
+                model="llama3.2",
+                messages=[{"role": "user", "content": user_input}]
+            )
             ai_response = response.get("message", {}).get("content", "No response from AI")
 
         return jsonify({"response": ai_response})

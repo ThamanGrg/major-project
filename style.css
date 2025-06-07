@@ -347,7 +347,8 @@ main {
         height: 90rem;
         scale: 0.4;
         top: -25%;
-        right: -20%;
+        left: 0;
+        transform: translateX(-55%);
     }
 
     .blob {
@@ -419,7 +420,8 @@ main {
         width: 48rem;
         height: 54rem;
         top: -20%;
-        right: -40%;
+        left: 0%;
+        transform: translateX(-55%);
     }
 
     .blob {
