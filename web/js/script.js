@@ -23,7 +23,7 @@ function appendChatMessage(sender, message) {
         let currentItem = listItems[0];
 
         for (let i = 1; i < listItems.length; i++) {
-            if (listItems[i].startsWith(' ')) { 
+            if (listItems[i].startsWith(' ')) {
                 currentItem += ' ' + listItems[i].trim();
             } else {
                 finalList.push(currentItem);
@@ -182,6 +182,10 @@ async function sendToBackend(text) {
         }
     } catch (error) {
         console.error("Error fetching response:", error);
+        recognition.stop();
+        stopBtn.style.display = 'none';
+        stopSpeech.style.display = 'none';
+        startBtn.style.display = 'inline';
     } finally {
         isRequestInProgress = false;
     }
@@ -203,7 +207,6 @@ function speakResponse(responseText) {
     stopSpeech.style.display = 'inline';
 
     let sentences = cleanedResponse.split(/(?<=[.!?]) +/);
-    console.log("AI Response Sentences:", sentences);
 
     function speakChunks(index) {
 
