@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LILY</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="icon" type="image/x-icon" href="images/logo.png">
+</head>
+
+<body>
+    <p id="transcript" style="display: none;">Click To Start</p>
+    <div id="chat-history" style="display: none;"></div>
+    <img src="images/gradient.png" class="image-gradient" alt="gradient">
+    <div class="layer-blur"></div>
+    <div class="container">
+        <header>
+            <div class="logo" data-aos="fade-down" data-aos-duration="1500">
+                <img src="images/logo.png" alt="logo">
+                <h1>LILY</h1>
+            </div>
+            <nav>
+                <a href="" data-aos="fade-down" data-aos-duration="1500">HOME</a>
+                <a href="" data-aos="fade-down" data-aos-duration="2000">RESOURCES</a>
+                <a href="" data-aos="fade-down" data-aos-duration="2500">SETTINGS</a>
+                <a href="about.html" data-aos="fade-down" data-aos-duration="3000">ABOUT</a>
+            </nav>
+            <a href="" class="home"><img src="images/home.png" alt=""></a>
+            <div>
+                <button class="sign-in-btn" data-aos="fade-down" data-aos-duration="1500">Sign In</button>
+            </div>
+        </header>
+        <div class="main-section">
+            <div>
+                <main id="main">
+                    <div class="content">
+                        <div class="tag-box" data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-delay="300"
+                            data-aos-offset="0" data-aos-duration="1500">
+                            <div class="tag">INTRODUCING &#10022;</div>
+                        </div>
+                        <h1 data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-delay="300"
+                            data-aos-offset="0" data-aos-duration="2000">LILY <br> SMART & FRIENDLY <br> AI VOICE
+                            ASSISTANT</h1>
+
+                        <p class="description" data-aos="fade-zoom-in" data-aos-easing="ease-in-back"
+                            data-aos-delay="300" data-aos-offset="0" data-aos-duration="3000">
+                            Meet LILY, an intelligent voice assistant designed to make conversations effortless and
+                            interactions
+                            smarter. Whether you need quick answers, task automation, or just someone to chat with, LILY
+                            is
+                            here
+                            to
+                            assist you
+                        </p>
+                        <div class="buttons" data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-delay="300"
+                            data-aos-offset="0" data-aos-duration="3000">
+                            <button class="documentation">Documentation &#129130;</button>
+                            <button class="get-started-btn" id="get-started-btn">Start chat &#129130;</button>
+                        </div>
+                    </div>
+                    <div class="voice-section">
+
+                        <div class="animation">
+                            <div class="blob">
+                                <div class="circle"></div>
+                                <div class="circle"></div>
+                                <div class="circle"></div>
+                            </div>
+                        </div>
+                        <div class="voice-btns">
+                            <button id="start" style="display:inline;" class="vc-button">Start Chat</button>
+                            <button id="stop" style="display:none;" class="vc-button">Stop Chat</button>
+                            <button id="speechStop" style="display:none;" class="vc-button">Stop speaking</button>
+                        </div>
+                    </div>
+                </main>
+                <spline-viewer url="https://prod.spline.design/5H9Ws35-7-92MyYu/scene.splinecode"
+                    class="ai-avatar"></spline-viewer>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+<script src="js/script.js"></script>
+<script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.82/build/spline-viewer.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
+<script>
+    const element = document.getElementById("main");
+    const vs = document.querySelector(".voice-section");
+
+    document.getElementById("get-started-btn").addEventListener("click", () => {
+        document.querySelector(".ai-avatar").classList.add("ai-hidden")
+        document.querySelector(".content").classList.add("content-hidden");
+
+        setTimeout(() => {
+            document.querySelector(".voice-section").style.display = "flex";
+            document.querySelector(".content").style.display = "none";
+
+            Object.assign(element.style, {
+                flexDirection: "row",
+                alignItems: "center"
+            });
+
+            vs.style.display = "flex";
+            setTimeout(() => {
+                vs.style.opacity = "1";
+                vs.style.transform = "scale(1)";
+            }, 10);
+        }, 800);
+    });
+</script>
