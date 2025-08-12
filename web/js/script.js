@@ -1,57 +1,12 @@
-const startBtn = document.getElementById("start");
-const stopBtn = document.getElementById("stop");
-const stopSpeech = document.getElementById("speechStop");
-const transcriptP = document.getElementById("transcript");
-const chatHistory = document.getElementById("chat-history");
+const startBtn = document.getElementById("start-chat");
+const stopBtn = document.getElementById("stop-chat");
+const stopSpeech = document.getElementById("stop-speech");
 
-let isChatting = false;
-let isListening = false;
+let isRecording = false;
 let isSpeaking = false;
 let isRequestInProgress = false;
-let recognition;
+let isChatting = false;
 let audioStream = null;
-
-function appendChatMessage(sender, message) {
-    let messageElement = document.createElement("p");
-
-    if (/\d+\.\s/.test(message)) {
-        let cleanedMessage = message.replace(/\n\n/g, ' ').trim();
-
-        let listItems = cleanedMessage.split(/\d+\.\s/).filter(item => item.trim() !== '').map(item => item.trim());
-
-        let finalList = [];
-        let currentItem = listItems[0];
-
-        for (let i = 1; i < listItems.length; i++) {
-            if (listItems[i].startsWith(' ')) {
-                currentItem += ' ' + listItems[i].trim();
-            } else {
-                finalList.push(currentItem);
-                currentItem = listItems[i];
-            }
-        }
-        finalList.push(currentItem);
-
-        let listElement = document.createElement("ul");
-        listElement.style.listStyleType = 'none';
-        finalList.forEach((item, index) => {
-            let listItem = document.createElement("li");
-            listItem.textContent = `${index + 1}. ${item}`;
-            listElement.appendChild(listItem);
-        });
-
-        let listMessageElement = document.createElement("div");
-        listMessageElement.innerHTML = `<strong>${sender}:</strong>`;
-        listMessageElement.appendChild(listElement);
-        chatHistory.appendChild(listMessageElement);
-    } else {
-        messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
-        chatHistory.appendChild(messageElement);
-    }
-
-    chatHistory.scrollTop = chatHistory.scrollHeight;
-}
-
 
 
 async function getMicrophoneAccess() {
@@ -82,31 +37,26 @@ if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
 
     recognition.onstart = () => {
         isRecording = true;
-        transcriptP.textContent = "Listening...";
     };
 
     recognition.onresult = (event) => {
         const transcript = event.results[event.results.length - 1][0].transcript;
-        transcriptP.textContent = transcript;
         sendToBackend(transcript);
     };
 
     recognition.onerror = (event) => {
         if (event.error == "no-speech") {
             console.log("Speech Recognition Error: " + event.error);
-            isChatting = true;
             isListening = false;
             recognition.stop();
 
             setTimeout(() => {
                 if (!isListening && isChatting) {
-                    transcriptP.textContent = "No voice detected. Exiting chat...";
                     recognition.stop();
                     isChatting = false;
 
                     stopBtn.style.display = 'none';
-                    stopSpeech.style.display = 'none';
-                    startBtn.style.display = 'inline';
+                    startBtn.style.display = 'flex';
 
                 } else {
                     console.log("Resuming chat...");
@@ -130,17 +80,15 @@ if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
 startBtn.onclick = async () => {
     isChatting = true;
     startBtn.style.display = 'none';
-    stopBtn.style.display = 'inline';
-    stopSpeech.style.display = 'none';
+    stopBtn.style.display = 'flex';
     await getMicrophoneAccess();
     recognition.start();
 };
 
 stopBtn.onclick = () => {
     isChatting = false;
-    startBtn.style.display = 'inline';
+    startBtn.style.display = 'flex';
     stopBtn.style.display = 'none';
-    stopSpeech.style.display = 'none';
     recognition.stop();
 };
 
@@ -150,7 +98,6 @@ async function sendToBackend(text) {
 
     try {
         console.log("You: ", text);
-        appendChatMessage("You", text);
 
         let response = await fetch("http://127.0.0.1:5700/process-text", {
             method: "POST",
@@ -165,7 +112,6 @@ async function sendToBackend(text) {
         if (result && result.response) {
             let aiResponse = result.response;
             console.log("AI Response:", aiResponse);
-            appendChatMessage("AI", aiResponse);
             speakResponse(aiResponse);
 
             if (["bye", "good night"].some(word => aiResponse.toLowerCase().includes(word))) {
@@ -174,8 +120,7 @@ async function sendToBackend(text) {
                 recognition.stop();
 
                 stopBtn.style.display = 'none';
-                stopSpeech.style.display = 'none';
-                startBtn.style.display = 'inline';
+                startBtn.style.display = 'flex';
             }
         } else {
             console.error("Invalid response format:", result);
@@ -184,8 +129,7 @@ async function sendToBackend(text) {
         console.error("Error fetching response:", error);
         recognition.stop();
         stopBtn.style.display = 'none';
-        stopSpeech.style.display = 'none';
-        startBtn.style.display = 'inline';
+        startBtn.style.display = 'flex';
     } finally {
         isRequestInProgress = false;
     }
@@ -195,21 +139,20 @@ function speakResponse(responseText) {
     const cleanedResponse = responseText.replace(/\*/g, '').replace(/<\/?think>/g, '').trim();
 
     if (isSpeaking) return;
-
     isSpeaking = true;
+
     recognition.stop();
+    stopSpeech.style.display = 'flex';
 
     let availableVoices = window.speechSynthesis.getVoices();
     const googleUKFemaleVoice = availableVoices.find(voice => voice.name === 'Google UK English Female');
+    const defaultVoice = availableVoices.find(voice => voice.lang.includes('en')) || null;
 
     window.speechSynthesis.cancel();
 
-    stopSpeech.style.display = 'inline';
-
-    let sentences = cleanedResponse.split(/(?<=[.!?]) +/);
+    const sentences = cleanedResponse.split(/(?<=[.!?]) +/);
 
     function speakChunks(index) {
-
         if (index >= sentences.length) {
             isSpeaking = false;
             stopSpeech.style.display = 'none';
@@ -224,8 +167,9 @@ function speakResponse(responseText) {
             return;
         }
 
-        let utterance = new SpeechSynthesisUtterance(sentences[index].trim());
+        const utterance = new SpeechSynthesisUtterance(sentences[index].trim());
         if (googleUKFemaleVoice) utterance.voice = googleUKFemaleVoice;
+        else if (defaultVoice) utterance.voice = defaultVoice;
 
         utterance.pitch = 1;
         utterance.rate = 1;
@@ -233,21 +177,19 @@ function speakResponse(responseText) {
 
         utterance.onend = () => {
             speakChunks(index + 1);
-        }
+        };
 
         window.speechSynthesis.speak(utterance);
     }
 
     speakChunks(0);
 
-
-
     stopSpeech.onclick = async () => {
         window.speechSynthesis.cancel();
         isSpeaking = false;
+        stopSpeech.style.display = 'none';
         await getMicrophoneAccess();
         recognition.start();
-        stopSpeech.style.display = 'none';
     };
 }
 

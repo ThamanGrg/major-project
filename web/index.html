@@ -4,119 +4,688 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LILY</title>
+    <title>LILY AI VOICE ASSISTANT</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <link rel="icon" type="image/x-icon" href="images/logo.png">
 </head>
 
 <body>
-    <p id="transcript" style="display: none;">Click To Start</p>
-    <div id="chat-history" style="display: none;"></div>
+    <div id="alert-box" class="alert hidden"></div>
+
     <img src="images/gradient.png" class="image-gradient" alt="gradient">
     <div class="layer-blur"></div>
-    <div class="container">
+
+    <section class="hearder-section">
         <header>
-            <div class="logo" data-aos="fade-down" data-aos-duration="1500">
+            <div class="logo">
                 <img src="images/logo.png" alt="logo">
                 <h1>LILY</h1>
             </div>
             <nav>
-                <a href="" data-aos="fade-down" data-aos-duration="1500">HOME</a>
-                <a href="" data-aos="fade-down" data-aos-duration="2000">RESOURCES</a>
-                <a href="" data-aos="fade-down" data-aos-duration="2500">SETTINGS</a>
-                <a href="about.html" data-aos="fade-down" data-aos-duration="3000">ABOUT</a>
+                <a data-page="home" class="nav-btn">HOME</a>
+                <a data-page="setting" class="nav-btn">SETTINGS</a>
+                <a data-page="about" class="nav-btn">ABOUT</a>
             </nav>
-            <a href="" class="home"><img src="images/home.png" alt=""></a>
+            <a class="home nav-btn" data-page="home"><img src="images/home.png" alt=""></a>
             <div>
-                <button class="sign-in-btn" data-aos="fade-down" data-aos-duration="1500">Sign In</button>
+                <button class="sign-in-btn">Sign In</button>
             </div>
         </header>
+    </section>
+    <section class="main-container page" id="home">
         <div class="main-section">
             <div>
-                <main id="main">
-                    <div class="content">
-                        <div class="tag-box" data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-delay="300"
-                            data-aos-offset="0" data-aos-duration="1500">
-                            <div class="tag">INTRODUCING &#10022;</div>
-                        </div>
-                        <h1 data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-delay="300"
-                            data-aos-offset="0" data-aos-duration="2000">LILY <br> SMART & FRIENDLY <br> AI VOICE
-                            ASSISTANT</h1>
-
-                        <p class="description" data-aos="fade-zoom-in" data-aos-easing="ease-in-back"
-                            data-aos-delay="300" data-aos-offset="0" data-aos-duration="3000">
-                            Meet LILY, an intelligent voice assistant designed to make conversations effortless and
-                            interactions
-                            smarter. Whether you need quick answers, task automation, or just someone to chat with, LILY
-                            is
-                            here
-                            to
-                            assist you
-                        </p>
-                        <div class="buttons" data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-delay="300"
-                            data-aos-offset="0" data-aos-duration="3000">
-                            <button class="documentation">Documentation &#129130;</button>
-                            <button class="get-started-btn" id="get-started-btn">Start chat &#129130;</button>
-                        </div>
+                <div class="blob-container">
+                    <div class="glow-background"></div>
+                    <div class="blob">
+                        <svg width="440" height="440" viewBox="0 0 440 440" fill="none"
+                            xmlns="http://www.w3.org/2000/svg" class="voice-blob">
+                            <g id="02">
+                                <g id="Ellipse-33" filter="url(#filter0_f_3_104)">
+                                    <g clip-path="url(#paint0_angular_3_104_clip_path)" data-figma-skip-parse="true">
+                                        <g transform="matrix(0 0.2 -0.2 0 220 220)">
+                                            <foreignObject x="-1005" y="-1005" width="2010" height="2010">
+                                                <div xmlns="http://www.w3.org/1999/xhtml"
+                                                    style="background:conic-gradient(from 90deg,rgba(49, 44, 163, 1) 0deg,rgba(54, 14, 105, 1) 112.92deg,rgba(255, 255, 255, 0) 360deg);height:100%;width:100%;opacity:0.4">
+                                                </div>
+                                            </foreignObject>
+                                        </g>
+                                    </g>
+                                    <circle cx="220" cy="220" r="200"
+                                        data-figma-gradient-fill="{&#34;type&#34;:&#34;GRADIENT_ANGULAR&#34;,&#34;stops&#34;:[{&#34;color&#34;:{&#34;r&#34;:0.19564837217330933,&#34;g&#34;:0.17378471791744232,&#34;b&#34;:0.64166665077209473,&#34;a&#34;:1.0},&#34;position&#34;:0.0},{&#34;color&#34;:{&#34;r&#34;:0.21422499418258667,&#34;g&#34;:0.058437500149011612,&#34;b&#34;:0.41249999403953552,&#34;a&#34;:1.0},&#34;position&#34;:0.31366547942161560},{&#34;color&#34;:{&#34;r&#34;:1.0,&#34;g&#34;:1.0,&#34;b&#34;:1.0,&#34;a&#34;:0.0},&#34;position&#34;:1.0}],&#34;stopsVar&#34;:[],&#34;transform&#34;:{&#34;m00&#34;:2.4492936839945120e-14,&#34;m01&#34;:-400.0,&#34;m02&#34;:420.0,&#34;m10&#34;:400.0,&#34;m11&#34;:2.4492936839945120e-14,&#34;m12&#34;:20.0},&#34;opacity&#34;:0.40000000596046448,&#34;blendMode&#34;:&#34;NORMAL&#34;,&#34;visible&#34;:true}" />
+                                </g>
+                                <g id="Ellipse-35" filter="url(#filter1_f_3_104)">
+                                    <g clip-path="url(#paint1_angular_3_104_clip_path)" data-figma-skip-parse="true">
+                                        <g transform="matrix(0 0.2 -0.2 0 220 220)">
+                                            <foreignObject x="-1005" y="-1005" width="2010" height="2010">
+                                                <div xmlns="http://www.w3.org/1999/xhtml"
+                                                    style="background:conic-gradient(from 90deg,rgba(49, 44, 163, 1) 0deg,rgba(54, 14, 105, 1) 112.92deg,rgba(255, 255, 255, 0) 360deg);height:100%;width:100%;opacity:0.8">
+                                                </div>
+                                            </foreignObject>
+                                        </g>
+                                    </g>
+                                    <circle cx="220" cy="220" r="200"
+                                        data-figma-gradient-fill="{&#34;type&#34;:&#34;GRADIENT_ANGULAR&#34;,&#34;stops&#34;:[{&#34;color&#34;:{&#34;r&#34;:0.19564837217330933,&#34;g&#34;:0.17378471791744232,&#34;b&#34;:0.64166665077209473,&#34;a&#34;:1.0},&#34;position&#34;:0.0},{&#34;color&#34;:{&#34;r&#34;:0.21422499418258667,&#34;g&#34;:0.058437500149011612,&#34;b&#34;:0.41249999403953552,&#34;a&#34;:1.0},&#34;position&#34;:0.31366547942161560},{&#34;color&#34;:{&#34;r&#34;:1.0,&#34;g&#34;:1.0,&#34;b&#34;:1.0,&#34;a&#34;:0.0},&#34;position&#34;:1.0}],&#34;stopsVar&#34;:[],&#34;transform&#34;:{&#34;m00&#34;:2.4492936839945120e-14,&#34;m01&#34;:-400.0,&#34;m02&#34;:420.0,&#34;m10&#34;:400.0,&#34;m11&#34;:2.4492936839945120e-14,&#34;m12&#34;:20.0},&#34;opacity&#34;:0.80000001192092896,&#34;blendMode&#34;:&#34;NORMAL&#34;,&#34;visible&#34;:true}" />
+                                </g>
+                                <g id="Ellipse-34" filter="url(#filter2_iii_3_104)">
+                                    <circle cx="220" cy="220" r="200" fill="#080722" />
+                                    <circle cx="220" cy="220" r="200" fill="url(#paint2_radial_3_104)"
+                                        fill-opacity="0.9" />
+                                    <circle cx="220" cy="220" r="200" fill="url(#paint3_radial_3_104)"
+                                        fill-opacity="0.85" />
+                                    <circle cx="220" cy="220" r="200" fill="url(#paint4_radial_3_104)"
+                                        fill-opacity="0.8" />
+                                    <circle cx="220" cy="220" r="200" fill="url(#paint5_radial_3_104)"
+                                        fill-opacity="0.45" />
+                                </g>
+                                <mask id="mask0_3_104" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="20" y="20"
+                                    width="400" height="400">
+                                    <circle id="Ellipse-9" cx="220" cy="220" r="200" fill="url(#paint6_radial_3_104)" />
+                                </mask>
+                                <g mask="url(#mask0_3_104)">
+                                    <g id="Line-19" class="wave-group" style="mix-blend-mode:plus-lighter"
+                                        filter="url(#filter3_di_3_104)">
+                                        <path
+                                            d="M139.697 221.726C134.596 225.04 128.792 225.888 121.419 221.726H24C24 221.726 45.4027 219.173 71.9717 219.173C98.5406 219.173 107.296 213.751 121.419 221.726H139.697C159.615 208.785 168.812 158.255 218.839 221.726H282.542C291.083 204.676 299.447 186.159 314.782 185.995C329.154 185.843 345.041 219.173 362.016 219.173C378.99 219.173 413.677 221.726 413.677 221.726H282.542C269.738 247.287 256.534 269.551 218.839 221.726H139.697Z"
+                                            fill="url(#paint7_radial_3_104)" shape-rendering="crispEdges" />
+                                        <path
+                                            d="M139.697 221.726C134.596 225.04 128.792 225.888 121.419 221.726H24C24 221.726 45.4027 219.173 71.9717 219.173C98.5406 219.173 107.296 213.751 121.419 221.726H139.697C159.615 208.785 168.812 158.255 218.839 221.726H282.542C291.083 204.676 299.447 186.159 314.782 185.995C329.154 185.843 345.041 219.173 362.016 219.173C378.99 219.173 413.677 221.726 413.677 221.726H282.542C269.738 247.287 256.534 269.551 218.839 221.726H139.697Z"
+                                            fill="url(#paint8_radial_3_104)" shape-rendering="crispEdges" />
+                                    </g>
+                                    <g id="Line-21" class="wave-group" style="mix-blend-mode:plus-lighter"
+                                        filter="url(#filter4_dif_3_104)">
+                                        <path
+                                            d="M121 221.773C126.568 207.178 131.953 210.988 137.588 221.773L201.234 221.773C248 38 266 240 360.561 216.343C376.957 212.241 412 221.773 412 221.773L201.234 221.773C171.481 338.69 153.535 252.298 137.588 221.773L121 221.773C99.6728 277.678 94.2651 221.773 67.8106 221.773H121Z"
+                                            fill="url(#paint9_radial_3_104)" shape-rendering="crispEdges" />
+                                        <path
+                                            d="M121 221.773C126.568 207.178 131.953 210.988 137.588 221.773L201.234 221.773C248 38 266 240 360.561 216.343C376.957 212.241 412 221.773 412 221.773L201.234 221.773C171.481 338.69 153.535 252.298 137.588 221.773L121 221.773C99.6728 277.678 94.2651 221.773 67.8106 221.773H121Z"
+                                            fill="url(#paint10_radial_3_104)" shape-rendering="crispEdges" />
+                                    </g>
+                                    <g id="Line-20" class="wave-group" style="mix-blend-mode:plus-lighter"
+                                        filter="url(#filter5_di_3_104)">
+                                        <path
+                                            d="M218.839 221.726C168 256 146.839 247.451 121.419 221.726H24C24 221.726 45.4027 219.173 71.9717 219.173C98.5406 219.173 96 196 121.419 221.726H218.839C273.139 185.117 303.247 219.173 362.016 219.173C378.99 219.173 413.677 221.726 413.677 221.726H218.839Z"
+                                            fill="url(#paint11_radial_3_104)" shape-rendering="crispEdges" />
+                                        <path
+                                            d="M218.839 221.726C168 256 146.839 247.451 121.419 221.726H24C24 221.726 45.4027 219.173 71.9717 219.173C98.5406 219.173 96 196 121.419 221.726H218.839C273.139 185.117 303.247 219.173 362.016 219.173C378.99 219.173 413.677 221.726 413.677 221.726H218.839Z"
+                                            fill="url(#paint12_radial_3_104)" shape-rendering="crispEdges" />
+                                    </g>
+                                    <g id="Line-22" class="wave-group" style="mix-blend-mode:plus-lighter"
+                                        filter="url(#filter6_di_3_104)">
+                                        <path
+                                            d="M184.599 222.175C163.151 252.549 140.502 305.153 121.782 222.175H52.1042C78.7721 222.175 92.2532 91.2818 121.782 222.175H184.599C196.984 204.635 208.968 194.508 219.564 222.175H375.29C381.523 221.254 388.196 221.18 395.376 222.175H415.128C415.128 222.175 491.735 235.529 395.378 222.175C395.377 222.175 395.376 222.175 395.376 222.175H375.29C297.886 233.611 288.453 375.642 219.564 222.175H184.599Z"
+                                            fill="url(#paint13_radial_3_104)" shape-rendering="crispEdges" />
+                                        <path
+                                            d="M184.599 222.175C163.151 252.549 140.502 305.153 121.782 222.175H52.1042C78.7721 222.175 92.2532 91.2818 121.782 222.175H184.599C196.984 204.635 208.968 194.508 219.564 222.175H375.29C381.523 221.254 388.196 221.18 395.376 222.175H415.128C415.128 222.175 491.735 235.529 395.378 222.175C395.377 222.175 395.376 222.175 395.376 222.175H375.29C297.886 233.611 288.453 375.642 219.564 222.175H184.599Z"
+                                            fill="url(#paint14_radial_3_104)" shape-rendering="crispEdges" />
+                                    </g>
+                                    <g id="line-23" style="mix-blend-mode:plus-lighter" filter="url(#filter7_di_3_104)">
+                                        <path
+                                            d="M410 220C410 217.791 250 117.788 156 229.788C62 341.788 20 213.791 20 216C20 216.72 32 216 58 216C105.904 209.776 189.318 200.803 250 248C340 318 410 222.209 410 220Z"
+                                            fill="url(#paint15_radial_3_104)" shape-rendering="crispEdges" />
+                                        <path
+                                            d="M410 220C410 217.791 250 117.788 156 229.788C62 341.788 20 213.791 20 216C20 216.72 32 216 58 216C105.904 209.776 189.318 200.803 250 248C340 318 410 222.209 410 220Z"
+                                            fill="url(#paint16_radial_3_104)" shape-rendering="crispEdges" />
+                                    </g>
+                                    <g id="line-24" class="wave-group" style="mix-blend-mode:plus-lighter"
+                                        filter="url(#filter8_di_3_104)">
+                                        <path
+                                            d="M420 220C420 222.209 286 224 220 224C154 224 20 222.209 20 220C20 217.791 108 190 220 216C332 242 420 217.791 420 220Z"
+                                            fill="url(#paint17_radial_3_104)" shape-rendering="crispEdges" />
+                                        <path
+                                            d="M420 220C420 222.209 286 224 220 224C154 224 20 222.209 20 220C20 217.791 108 190 220 216C332 242 420 217.791 420 220Z"
+                                            fill="url(#paint18_radial_3_104)" fill-opacity="0.5"
+                                            shape-rendering="crispEdges" />
+                                    </g>
+                                </g>
+                            </g>
+                            <defs>
+                                <filter id="filter0_f_3_104" x="0" y="0" width="440" height="440"
+                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                                    <feGaussianBlur stdDeviation="10" result="effect1_foregroundBlur_3_104" />
+                                </filter>
+                                <clipPath id="paint0_angular_3_104_clip_path">
+                                    <circle cx="220" cy="220" r="200" />
+                                </clipPath>
+                                <filter id="filter1_f_3_104" x="15" y="15" width="410" height="410"
+                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                                    <feGaussianBlur stdDeviation="2.5" result="effect1_foregroundBlur_3_104" />
+                                </filter>
+                                <clipPath id="paint1_angular_3_104_clip_path">
+                                    <circle cx="220" cy="220" r="200" />
+                                </clipPath>
+                                <filter id="filter2_iii_3_104" x="20" y="20" width="400" height="400"
+                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                    <feOffset />
+                                    <feGaussianBlur stdDeviation="20" />
+                                    <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
+                                    <feColorMatrix type="matrix"
+                                        values="0 0 0 0 0.185021 0 0 0 0 0.156042 0 0 0 0 0.735625 0 0 0 1 0" />
+                                    <feBlend mode="normal" in2="shape" result="effect1_innerShadow_3_104" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                    <feOffset />
+                                    <feGaussianBlur stdDeviation="15" />
+                                    <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
+                                    <feColorMatrix type="matrix"
+                                        values="0 0 0 0 0.2075 0 0 0 0 0.175 0 0 0 0 0.825 0 0 0 1 0" />
+                                    <feBlend mode="normal" in2="effect1_innerShadow_3_104"
+                                        result="effect2_innerShadow_3_104" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                    <feOffset />
+                                    <feGaussianBlur stdDeviation="6" />
+                                    <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
+                                    <feColorMatrix type="matrix"
+                                        values="0 0 0 0 0.791969 0 0 0 0 0.783437 0 0 0 0 0.954063 0 0 0 1 0" />
+                                    <feBlend mode="normal" in2="effect2_innerShadow_3_104"
+                                        result="effect3_innerShadow_3_104" />
+                                </filter>
+                                <filter id="filter3_di_3_104" x="15" y="177.995" width="407.677" height="81.8574"
+                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                    <feOffset dy="1" />
+                                    <feGaussianBlur stdDeviation="4.5" />
+                                    <feComposite in2="hardAlpha" operator="out" />
+                                    <feColorMatrix type="matrix"
+                                        values="0 0 0 0 0.426944 0 0 0 0 0.966667 0 0 0 0 0.966667 0 0 0 0.8 0" />
+                                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_3_104" />
+                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_3_104"
+                                        result="shape" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                    <feOffset />
+                                    <feGaussianBlur stdDeviation="1" />
+                                    <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
+                                    <feColorMatrix type="matrix"
+                                        values="0 0 0 0 0.900833 0 0 0 0 0.854167 0 0 0 0 1 0 0 0 1 0" />
+                                    <feBlend mode="normal" in2="shape" result="effect2_innerShadow_3_104" />
+                                </filter>
+                                <filter id="filter4_dif_3_104" x="15" y="135.824" width="406" height="155.383"
+                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                    <feOffset dy="1" />
+                                    <feGaussianBlur stdDeviation="4.5" />
+                                    <feComposite in2="hardAlpha" operator="out" />
+                                    <feColorMatrix type="matrix"
+                                        values="0 0 0 0 0.426944 0 0 0 0 0.578067 0 0 0 0 0.966667 0 0 0 0.8 0" />
+                                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_3_104" />
+                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_3_104"
+                                        result="shape" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                    <feOffset />
+                                    <feGaussianBlur stdDeviation="1" />
+                                    <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
+                                    <feColorMatrix type="matrix"
+                                        values="0 0 0 0 0.416083 0 0 0 0 0.404167 0 0 0 0 1 0 0 0 1 0" />
+                                    <feBlend mode="normal" in2="shape" result="effect2_innerShadow_3_104" />
+                                    <feGaussianBlur stdDeviation="0.25" result="effect3_foregroundBlur_3_104" />
+                                </filter>
+                                <filter id="filter5_di_3_104" x="15" y="196.766" width="407.677" height="57.5726"
+                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                    <feOffset dy="1" />
+                                    <feGaussianBlur stdDeviation="4.5" />
+                                    <feComposite in2="hardAlpha" operator="out" />
+                                    <feColorMatrix type="matrix"
+                                        values="0 0 0 0 0.664422 0 0 0 0 0.426944 0 0 0 0 0.966667 0 0 0 0.8 0" />
+                                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_3_104" />
+                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_3_104"
+                                        result="shape" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                    <feOffset />
+                                    <feGaussianBlur stdDeviation="1" />
+                                    <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
+                                    <feColorMatrix type="matrix"
+                                        values="0 0 0 0 0.900833 0 0 0 0 0.854167 0 0 0 0 1 0 0 0 1 0" />
+                                    <feBlend mode="normal" in2="shape" result="effect2_innerShadow_3_104" />
+                                </filter>
+                                <filter id="filter6_di_3_104" x="15" y="156" width="438" height="146.996"
+                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                    <feOffset dy="1" />
+                                    <feGaussianBlur stdDeviation="4.5" />
+                                    <feComposite in2="hardAlpha" operator="out" />
+                                    <feColorMatrix type="matrix"
+                                        values="0 0 0 0 0.664422 0 0 0 0 0.426944 0 0 0 0 0.966667 0 0 0 0.8 0" />
+                                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_3_104" />
+                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_3_104"
+                                        result="shape" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                    <feOffset />
+                                    <feGaussianBlur stdDeviation="1" />
+                                    <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
+                                    <feColorMatrix type="matrix"
+                                        values="0 0 0 0 0.900833 0 0 0 0 0.854167 0 0 0 0 1 0 0 0 1 0" />
+                                    <feBlend mode="normal" in2="shape" result="effect2_innerShadow_3_104" />
+                                </filter>
+                                <filter id="filter7_di_3_104" x="11" y="168.799" width="408" height="116.995"
+                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                    <feOffset dy="1" />
+                                    <feGaussianBlur stdDeviation="4.5" />
+                                    <feComposite in2="hardAlpha" operator="out" />
+                                    <feColorMatrix type="matrix"
+                                        values="0 0 0 0 0.664422 0 0 0 0 0.426944 0 0 0 0 0.966667 0 0 0 0.8 0" />
+                                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_3_104" />
+                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_3_104"
+                                        result="shape" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                    <feOffset />
+                                    <feGaussianBlur stdDeviation="1" />
+                                    <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
+                                    <feColorMatrix type="matrix"
+                                        values="0 0 0 0 0.416083 0 0 0 0 0.404167 0 0 0 0 1 0 0 0 1 0" />
+                                    <feBlend mode="normal" in2="shape" result="effect2_innerShadow_3_104" />
+                                </filter>
+                                <filter id="filter8_di_3_104" x="11" y="196.961" width="418" height="41.1741"
+                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                    <feOffset dy="1" />
+                                    <feGaussianBlur stdDeviation="4.5" />
+                                    <feComposite in2="hardAlpha" operator="out" />
+                                    <feColorMatrix type="matrix"
+                                        values="0 0 0 0 0.91225 0 0 0 0 0.6625 0 0 0 0 1 0 0 0 0.8 0" />
+                                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_3_104" />
+                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_3_104"
+                                        result="shape" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                    <feOffset />
+                                    <feGaussianBlur stdDeviation="1" />
+                                    <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
+                                    <feColorMatrix type="matrix"
+                                        values="0 0 0 0 0.900833 0 0 0 0 0.854167 0 0 0 0 1 0 0 0 1 0" />
+                                    <feBlend mode="normal" in2="shape" result="effect2_innerShadow_3_104" />
+                                </filter>
+                                <radialGradient id="paint2_radial_3_104" cx="0" cy="0" r="1"
+                                    gradientUnits="userSpaceOnUse"
+                                    gradientTransform="translate(136 46) rotate(63.4457) scale(194.52 230.752)">
+                                    <stop stop-color="#8F8AE6" stop-opacity="0.63" />
+                                    <stop offset="1" stop-color="#2C25AD" stop-opacity="0" />
+                                </radialGradient>
+                                <radialGradient id="paint3_radial_3_104" cx="0" cy="0" r="1"
+                                    gradientUnits="userSpaceOnUse"
+                                    gradientTransform="translate(409.35 155.504) rotate(151.458) scale(176.843)">
+                                    <stop stop-color="#3E36D4" />
+                                    <stop offset="1" stop-color="#3029C0" stop-opacity="0" />
+                                </radialGradient>
+                                <radialGradient id="paint4_radial_3_104" cx="0" cy="0" r="1"
+                                    gradientUnits="userSpaceOnUse"
+                                    gradientTransform="translate(286.273 409.351) rotate(-108.939) scale(127.619)">
+                                    <stop stop-color="#5B54DB" />
+                                    <stop offset="1" stop-color="#5B55DB" stop-opacity="0" />
+                                </radialGradient>
+                                <radialGradient id="paint5_radial_3_104" cx="0" cy="0" r="1"
+                                    gradientUnits="userSpaceOnUse"
+                                    gradientTransform="translate(174 220) rotate(-19.7672) scale(136.015 202.687)">
+                                    <stop stop-color="#2D26B2" />
+                                    <stop offset="1" stop-color="#453DD6" stop-opacity="0" />
+                                </radialGradient>
+                                <radialGradient id="paint6_radial_3_104" cx="0" cy="0" r="1"
+                                    gradientUnits="userSpaceOnUse"
+                                    gradientTransform="translate(220 220) rotate(90) scale(200)">
+                                    <stop offset="0.351881" stop-color="#D9D9D9" />
+                                    <stop offset="1" stop-color="#D9D9D9" stop-opacity="0" />
+                                </radialGradient>
+                                <radialGradient id="paint7_radial_3_104" cx="0" cy="0" r="1"
+                                    gradientUnits="userSpaceOnUse"
+                                    gradientTransform="translate(218.839 226.849) rotate(90) scale(36.0981 204.174)">
+                                    <stop stop-color="#2542DD" stop-opacity="0" />
+                                    <stop offset="1" stop-color="#361D80" />
+                                </radialGradient>
+                                <radialGradient id="paint8_radial_3_104" cx="0" cy="0" r="1"
+                                    gradientUnits="userSpaceOnUse"
+                                    gradientTransform="translate(24 233.493) scale(221.408 2976.82)">
+                                    <stop offset="0.297404" stop-color="#D1C1FF" stop-opacity="0.52" />
+                                    <stop offset="1" stop-color="#D1C1FF" stop-opacity="0" />
+                                </radialGradient>
+                                <radialGradient id="paint9_radial_3_104" cx="0" cy="0" r="1"
+                                    gradientUnits="userSpaceOnUse"
+                                    gradientTransform="translate(218 203.748) rotate(90) scale(83.1894 203.295)">
+                                    <stop stop-color="#2542DD" stop-opacity="0" />
+                                    <stop offset="1" stop-color="#11195F" />
+                                </radialGradient>
+                                <radialGradient id="paint10_radial_3_104" cx="0" cy="0" r="1"
+                                    gradientUnits="userSpaceOnUse"
+                                    gradientTransform="translate(24 219.059) scale(220.455 6860.19)">
+                                    <stop offset="0.297404" stop-color="#D1C1FF" stop-opacity="0.52" />
+                                    <stop offset="1" stop-color="#D1C1FF" stop-opacity="0" />
+                                </radialGradient>
+                                <radialGradient id="paint11_radial_3_104" cx="0" cy="0" r="1"
+                                    gradientUnits="userSpaceOnUse"
+                                    gradientTransform="translate(218.839 227.94) rotate(90) scale(17.8562 204.174)">
+                                    <stop stop-color="#2542DD" stop-opacity="0" />
+                                    <stop offset="1" stop-color="#361D80" />
+                                </radialGradient>
+                                <radialGradient id="paint12_radial_3_104" cx="0" cy="0" r="1"
+                                    gradientUnits="userSpaceOnUse"
+                                    gradientTransform="translate(24 231.227) scale(221.408 1472.51)">
+                                    <stop offset="0.297404" stop-color="#D1C1FF" stop-opacity="0.52" />
+                                    <stop offset="1" stop-color="#D1C1FF" stop-opacity="0" />
+                                </radialGradient>
+                                <radialGradient id="paint13_radial_3_104" cx="0" cy="0" r="1"
+                                    gradientUnits="userSpaceOnUse"
+                                    gradientTransform="translate(219.564 232.917) rotate(90) scale(30.8647 204.934)">
+                                    <stop stop-color="#2542DD" stop-opacity="0" />
+                                    <stop offset="1" stop-color="#361D80" />
+                                </radialGradient>
+                                <radialGradient id="paint14_radial_3_104" cx="0" cy="0" r="1"
+                                    gradientUnits="userSpaceOnUse"
+                                    gradientTransform="translate(24 238.598) scale(222.232 2545.25)">
+                                    <stop offset="0.297404" stop-color="#D1C1FF" stop-opacity="0.52" />
+                                    <stop offset="1" stop-color="#D1C1FF" stop-opacity="0" />
+                                </radialGradient>
+                                <radialGradient id="paint15_radial_3_104" cx="0" cy="0" r="1"
+                                    gradientUnits="userSpaceOnUse"
+                                    gradientTransform="translate(220 240.299) rotate(-90) scale(4.84424 209.582)">
+                                    <stop stop-color="#2542DD" stop-opacity="0" />
+                                    <stop offset="1" stop-color="#11195F" />
+                                </radialGradient>
+                                <radialGradient id="paint16_radial_3_104" cx="0" cy="0" r="1"
+                                    gradientUnits="userSpaceOnUse"
+                                    gradientTransform="translate(20 239.407) scale(227.273 399.479)">
+                                    <stop offset="0.297404" stop-color="#D1C1FF" stop-opacity="0.52" />
+                                    <stop offset="1" stop-color="#D1C1FF" stop-opacity="0" />
+                                </radialGradient>
+                                <radialGradient id="paint17_radial_3_104" cx="0" cy="0" r="1"
+                                    gradientUnits="userSpaceOnUse"
+                                    gradientTransform="translate(206.252 219.938) rotate(90) scale(1.7637 195.175)">
+                                    <stop stop-color="#2542DD" stop-opacity="0" />
+                                    <stop offset="1" stop-color="#361D80" />
+                                </radialGradient>
+                                <radialGradient id="paint18_radial_3_104" cx="0" cy="0" r="1"
+                                    gradientUnits="userSpaceOnUse"
+                                    gradientTransform="translate(20 220.263) scale(211.65 145.443)">
+                                    <stop offset="0.297404" stop-color="#D1C1FF" stop-opacity="0.52" />
+                                    <stop offset="1" stop-color="#D1C1FF" stop-opacity="0" />
+                                </radialGradient>
+                            </defs>
+                        </svg>
                     </div>
-                    <div class="voice-section">
 
-                        <div class="animation">
-                            <div class="blob">
-                                <div class="circle"></div>
-                                <div class="circle"></div>
-                                <div class="circle"></div>
-                            </div>
-                        </div>
-                        <div class="voice-btns">
-                            <button id="start" style="display:inline;" class="vc-button">Start Chat</button>
-                            <button id="stop" style="display:none;" class="vc-button">Stop Chat</button>
-                            <button id="speechStop" style="display:none;" class="vc-button">Stop speaking</button>
-                        </div>
+                </div>
+            </div>
+
+            <div class="vc-buttons">
+                <div class="btn-left">
+                    <div id="model-buttons" class="model-buttons" style="display: none;">
+                        <button onclick="changeModel('llama3.2'); toggleModelButtons();">LLaMA 3.2</button>
+                        <button onclick="changeModel('mistral'); toggleModelButtons();">Mistral</button>
+                        <button onclick="changeModel('deepseek-r1'); toggleModelButtons();">deepseek-r1</button>
                     </div>
-                </main>
-                <spline-viewer url="https://prod.spline.design/5H9Ws35-7-92MyYu/scene.splinecode"
-                    class="ai-avatar"></spline-viewer>
+                    <div class="btn-border" title="Switch Model" id="switch-model" onclick="toggleModelButtons()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="none" viewBox="0 0 128 128"
+                            id="core">
+                            <path stroke="#8f8f8f" stroke-width="6"
+                                d="M24.8608 73.0703C29.6276 66.1452 37.7993 58.6367 47.8033 51.9899C57.8073 45.343 68.9366 40.0276 79.0492 37.0665C89.1618 34.1055 97.5431 33.7081 102.58 35.9508C107.617 38.1936 108.954 42.9179 106.333 49.2147C103.712 55.5115 97.3182 62.9357 88.383 70.0584C79.4477 77.1811 68.6021 83.499 57.9333 87.7962C47.2646 92.0934 37.5267 94.0661 30.5938 93.3347C23.661 92.6034 20.023 89.2196 20.3802 83.8346">
+                            </path>
+                            <path stroke="#8f8f8f" stroke-width="6"
+                                d="M57.848 17.6397C62.3044 13.7065 67.1684 14.1825 71.4964 18.9751C75.8245 23.7678 79.3079 32.5356 81.2711 43.5774C83.2342 54.6193 83.537 67.1481 82.1208 78.7332C80.7046 90.3183 77.6702 100.134 73.6065 106.276C69.5427 112.417 64.7393 114.447 60.128 111.972C55.5167 109.496 51.4263 102.692 48.6503 92.8782C45.8744 83.0647 44.6108 70.942 45.1048 58.8617C45.5987 46.7815 47.8149 35.605 51.3234 27.5005">
+                            </path>
+                            <path stroke="#8f8f8f" stroke-width="6"
+                                d="M104.256 91.12C108.367 88.2993 108.75 83.1596 105.332 76.6676C101.914 70.1755 94.9315 62.7786 85.6977 55.868C76.4639 48.9574 65.6151 43.0095 55.1919 39.143C44.7687 35.2765 35.4894 33.7578 29.0994 34.8727C22.7094 35.9876 19.6491 39.6591 20.494 45.1967C21.3389 50.7344 26.0309 57.7565 33.6874 64.9422C41.3439 72.128 51.4373 78.9822 62.069 84.2156C72.7008 89.449 83.1382 92.701 91.4182 93.3599">
+                            </path>
+                            <circle cx="6" cy="6" r="6" stroke="#8f8f8f" stroke-width="6"
+                                transform="matrix(1 0 0 -1 92 99)"></circle>
+                            <circle cx="6" cy="6" r="6" stroke="#8f8f8f" stroke-width="6"
+                                transform="matrix(1 0 0 -1 48 29)"></circle>
+                            <circle cx="6" cy="6" r="6" stroke="#8f8f8f" stroke-width="6"
+                                transform="matrix(1 0 0 -1 16 84)"></circle>
+                        </svg>
+                    </div>
+
+                </div>
+                <div class="btn-middle">
+                    <div class="btn-border" id="start-chat" title="Start Chat">
+                        <g id="SvgjsG1008">
+                            <svg xmlns="http://www.w3.org/2000/svg" version="1.2" viewBox="0 0 24 24" width="20"
+                                height="200" class="vc-icon">
+                                <path
+                                    d="M12 16c2.206 0 4-1.795 4-4V6c0-2.206-1.794-4-4-4S8 3.794 8 6v6c0 2.205 1.794 4 4 4zm7-4v-2a1 1 0 1 0-2 0v2c0 2.757-2.243 5-5 5s-5-2.243-5-5v-2a1 1 0 1 0-2 0v2c0 3.52 2.613 6.432 6 6.92V20H8a1 1 0 1 0 0 2h8a1 1 0 1 0 0-2h-3v-1.08c3.387-.488 6-3.4 6-6.92z"
+                                    fill="#8f8f8f" class="svgShape color000000-0 selectable"></path>
+                            </svg>
+                        </g>
+                    </div>
+                    <div class="btn-border" id="stop-chat" style="display: none;" title="Stop Chat">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="Stop vc-icon">
+                            <path d="M20 22a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-8a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8z"
+                                fill="#8f8f8f" class="color000000 svgShape"></path>
+                        </svg>
+                    </div>
+                    <div class="btn-border" id="stop-speech" style="display: none;" title="Stop speaking">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="none" viewBox="0 0 48 48"
+                            id="volume-x">
+                            <path fill="#8f8f8f"
+                                d="M12.4966 32.9133C9.37042 32.9133 6.77641 30.4035 6.73044 27.2776V20.8905C6.68351 17.699 9.2108 15.0867 12.4026 15.0867H14.6265C14.7743 15.0867 14.9169 15.0321 15.027 14.9334L20.838 9.7235C21.8815 8.78796 23.2337 8.27057 24.6352 8.27057C27.7767 8.27057 29.2738 10.8173 29.2738 13.9587L29.2738 34.0412C29.2738 37.1827 27.7767 39.7294 24.6352 39.7294C23.2337 39.7294 21.8815 39.212 20.838 38.2765L15.027 33.0666C14.9169 32.9679 14.7743 32.9133 14.6265 32.9133H12.4966Z">
+                            </path>
+                            <path fill="#8f8f8f" fill-rule="evenodd"
+                                d="M40.6551 19.6858C41.4752 20.5059 41.4752 21.8355 40.6551 22.6556L39.3108 24L40.6551 25.3443C41.4752 26.1644 41.4752 27.494 40.6551 28.3141C39.835 29.1342 38.5054 29.1342 37.6853 28.3141L36.3409 26.9698L34.9966 28.3141C34.1765 29.1342 32.8468 29.1342 32.0267 28.3141C31.2066 27.494 31.2066 26.1644 32.0267 25.3443L33.3711 24L32.0267 22.6556C31.2066 21.8355 31.2066 20.5059 32.0267 19.6858C32.8468 18.8657 34.1765 18.8657 34.9966 19.6858L36.3409 21.0301L37.6853 19.6858C38.5054 18.8657 39.835 18.8657 40.6551 19.6858Z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="btn-right">
+                    <div class="btn-border nav-btn" title="Text Mode" data-page="text-chat">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" id="Keyboard">
+                            <path
+                                d="M6.71,10.29A1,1,0,0,0,5,11a1,1,0,1,0,1.92-.38A1,1,0,0,0,6.71,10.29ZM9.29,7.71A1,1,0,0,0,10,8a1,1,0,0,0,.71-.29,1.15,1.15,0,0,0,.21-.33A1,1,0,0,0,11,7a1.05,1.05,0,0,0-.29-.71l-.15-.12-.18-.09A.6.6,0,0,0,10.19,6a1,1,0,0,0-.9.27,1,1,0,0,0-.21.33.94.94,0,0,0,0,.76A1.15,1.15,0,0,0,9.29,7.71ZM6.56,6.17a.76.76,0,0,0-.18-.09L6.2,6a1,1,0,0,0-.91.27,1,1,0,0,0-.21.33.94.94,0,0,0,0,.76,1.15,1.15,0,0,0,.21.33,1.15,1.15,0,0,0,.33.21A.84.84,0,0,0,6,8a1,1,0,0,0,.71-.29,1.15,1.15,0,0,0,.21-.33A1,1,0,0,0,7,7a1.05,1.05,0,0,0-.29-.71Zm6.15,12.12a1,1,0,0,0-1.42,0l-2,2a1,1,0,0,0,1.42,1.42L12,20.41l1.29,1.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Zm6-8a1,1,0,0,0-1.42,0,1,1,0,0,0-.21.33,1,1,0,0,0,1.3,1.3,1.15,1.15,0,0,0,.33-.21A1,1,0,0,0,19,11a.84.84,0,0,0-.08-.38A1,1,0,0,0,18.71,10.29ZM14,10H10a1,1,0,0,0,0,2h4a1,1,0,0,0,0-2Zm6-8H4A3,3,0,0,0,1,5v8a3,3,0,0,0,3,3H20a3,3,0,0,0,3-3V5A3,3,0,0,0,20,2Zm1,11a1,1,0,0,1-1,1H4a1,1,0,0,1-1-1V5A1,1,0,0,1,4,4H20a1,1,0,0,1,1,1ZM17.62,6.08a.93.93,0,0,0-.33.21A1.05,1.05,0,0,0,17,7a1,1,0,0,0,.08.38,1.15,1.15,0,0,0,.21.33A1,1,0,0,0,18,8a1,1,0,0,0,.71-.29,1.15,1.15,0,0,0,.21-.33A1,1,0,0,0,19,7a1.05,1.05,0,0,0-.29-.71A1,1,0,0,0,17.62,6.08Zm-3.06.09-.18-.09L14.2,6a1,1,0,0,0-.58.06.93.93,0,0,0-.33.21,1,1,0,0,0-.21.33.94.94,0,0,0,0,.76,1.15,1.15,0,0,0,.21.33A1,1,0,0,0,14,8a1,1,0,0,0,.71-.29,1.15,1.15,0,0,0,.21-.33A1,1,0,0,0,15,7a1.05,1.05,0,0,0-.29-.71Z"
+                                fill="#8f8f8f" class="color000000 svgShape">
+                            </path>
+                        </svg>
+                    </div>
+
+                </div>
             </div>
         </div>
+    </section>
 
-    </div>
+    <section class="text-chat page" id="text-chat">
+        <div class="text-chat-pg">
+            <div class="text-chat-pg-content">
+                <div class="text-response-container">
+                    <div id="user-image"></div>
+                    <div id="text-response"></div>
+                </div>
+                <div class="text-input-container">
+                    <textarea id="text-input" placeholder="Type your message here..."></textarea>
+                    <a data-page="home" class="nav-btn" title="Use Voice Mode">
+                        <img src="../icons/voice.png" alt="" class="txt-to-voice-icon">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-</body>
-<script src="js/script.js"></script>
-<script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.82/build/spline-viewer.js"></script>
-<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-<script>
-    AOS.init();
-</script>
-<script>
-    const element = document.getElementById("main");
-    const vs = document.querySelector(".voice-section");
+    <section class="setting page" id="setting">
+        <div>
+            <div class="setting-pg-hero">
+                <h1>Settings</h1>
+                <p>Customize your experience with Lily AI Voice Assistant.</p>
+            </div>
+            <div class="setting-pg-content">
+                <h2>Voice Settings</h2>
+                <label for="voice-select">Choose a voice:</label>
+                <select id="voice-select">
+                    <option value="default">Default</option>
+                    <option value="voice1">Voice 1</option>
+                    <option value="voice2">Voice 2</option>
+                </select>
 
-    document.getElementById("get-started-btn").addEventListener("click", () => {
-        document.querySelector(".ai-avatar").classList.add("ai-hidden")
-        document.querySelector(".content").classList.add("content-hidden");
+                <h2>Language Settings</h2>
+                <label for="language-select">Choose a language:</label>
+                <select id="language-select">
+                    <option value="en-US">English (US)</option>
+                    <option value="en-GB">English (UK)</option>
+                    <option value="es-ES">Spanish (Spain)</option>
+                    <!-- Add more languages as needed -->
+                </select>
 
-        setTimeout(() => {
-            document.querySelector(".voice-section").style.display = "flex";
-            document.querySelector(".content").style.display = "none";
+                <h2>Accessibility Options</h2>
+                <label for="accessibility-toggle">Enable Accessibility Features:</label>
+                <input type="checkbox" id="accessibility-toggle" checked>
 
-            Object.assign(element.style, {
-                flexDirection: "row",
-                alignItems: "center"
+                <button id="save-settings">Save Settings</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="about page" id="about">
+        <div>
+            <div class="about-pg-hero">
+                <div>
+                    <main id="main">
+                        <div class="content">
+                            <div class="tag-box" data-aos="fade-zoom-in" data-aos-easing="ease-in-back"
+                                data-aos-delay="300" data-aos-offset="0" data-aos-duration="1500">
+                                <div class="tag">INTRODUCING &#10022;</div>
+                            </div>
+                            <h1 data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-delay="300"
+                                data-aos-offset="0" data-aos-duration="2000">LILY <br> SMART & FRIENDLY <br> AI VOICE
+                                ASSISTANT</h1>
+
+                            <p class="description" data-aos="fade-zoom-in" data-aos-easing="ease-in-back"
+                                data-aos-delay="300" data-aos-offset="0" data-aos-duration="3000">
+                                Lily is an intelligent AI voice assistant designed to interact with users through both
+                                voice
+                                and text input, offering fast, context-aware responses to questions and commands. Built
+                                for
+                                accessibility and natural conversation, Lily leverages advanced large language models
+                                including DeepSeek, Mistral, and LLaMA 3.2 to ensure accurate, coherent, and insightful
+                                replies across a wide range of topics.
+                            </p>
+                        </div>
+                    </main>
+                    <spline-viewer url="https://prod.spline.design/5H9Ws35-7-92MyYu/scene.splinecode"
+                        class="ai-avatar"></spline-viewer>
+                </div>
+            </div>
+            <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.82/build/spline-viewer.js"></script>
+        </div>
+        <div>
+            <div class="about-pg-content">
+                <h2>Features</h2>
+                <ul>
+                    <li>Voice and text input support</li>
+                    <li>Context-aware responses</li>
+                    <li>Fast and accurate replies</li>
+                    <li>Built on advanced AI models</li>
+                    <li>Accessible and user-friendly interface</li>
+                </ul>
+
+                <h2>Technologies Used</h2>
+                <p>Lily is powered by state-of-the-art AI technologies, including:</p>
+                <ul>
+                    <li>DeepSeek AI for natural language understanding</li>
+                    <li>Mistral for efficient processing</li>
+                    <li>LLaMA 3.2 for advanced conversational capabilities</li>
+                </ul>
+
+                <h2>Get Started</h2>
+                <p>To start using Lily, simply click the "Start Chat" button in the voice control section.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 LILY AI Voice Assistant</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        const pages = document.querySelectorAll('.page');
+        const navButtons = document.querySelectorAll('.nav-btn');
+
+        navButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const pageId = button.getAttribute('data-page');
+
+                pages.forEach(page => {
+                    page.classList.add('my-hidden');
+                });
+
+                document.getElementById(pageId).classList.remove('my-hidden');
+
+                navButtons.forEach(btn => {
+                    btn.classList.remove('my-text-white');
+                    btn.classList.add('my-text-gray');
+                });
+                button.classList.remove('my-text-gray');
+                button.classList.add('my-text-white');
             });
 
-            vs.style.display = "flex";
+            window.onload = function () {
+                document.querySelector('[data-page="home"]').click();
+            };
+        });
+    </script>
+    <script>
+        function changeModel(modelName) {
+            fetch('http://127.0.0.1:5700/set-model', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ model: modelName })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log('Model switched to:', data.current_model);
+                    showAlert(`Model switched to ${data.current_model}`, 'success');
+                });
+        }
+    </script>
+    <script>
+        function showAlert(message, type = 'info', duration = 2000) {
+            const alertBox = document.getElementById('alert-box');
+
+            alertBox.className = 'alert';
+            alertBox.classList.add(type, 'show');
+            alertBox.textContent = message;
+            alertBox.classList.remove('hidden');
+
             setTimeout(() => {
-                vs.style.opacity = "1";
-                vs.style.transform = "scale(1)";
-            }, 10);
-        }, 800);
-    });
-</script>
+                alertBox.classList.add('hide-up');
+                alertBox.classList.remove('show');
+
+                setTimeout(() => {
+                    alertBox.classList.add('hidden');
+                    alertBox.classList.remove('hide-up');
+                }, 300);
+            }, duration);
+        }
+    </script>
+    <script>
+        function toggleModelButtons() {
+            const modelButtons = document.getElementById('model-buttons');
+            if (modelButtons.style.display === 'none' || modelButtons.style.display === '') {
+                modelButtons.style.display = 'flex';
+            } else {
+                modelButtons.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+
+</html>

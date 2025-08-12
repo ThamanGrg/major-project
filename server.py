@@ -9,8 +9,20 @@ app = Flask(__name__)
 CORS(app)
 hour = int(datetime.datetime.now().strftime("%H"))
 
+current_model = "llama3.2"
+
+@app.route('/set-model', methods=['POST'])
+def set_model():
+    global current_model
+    data = request.json
+    current_model = data.get('model', 'llama3.2')
+    print("Current model set to:", current_model)
+    return jsonify({"message": "Model updated", "current_model": current_model})
+    
+
 @app.route("/process-text", methods=["POST"])
 def process_text():
+    global current_model
     try:
         data = request.get_json()
         if not data:
@@ -33,7 +45,7 @@ def process_text():
 
         if re.search(r"\b(what is your name|your name|who are you)\b(?!\s+\w)", user_input.strip(), re.IGNORECASE):
             response = ollama.chat(
-                model="llama3.2",
+                model= current_model,
                 messages=[{"role": "user", "content": "user asked your name or who are you, your name is Lily. Respond in a friendly way in short"}]
             )
             ai_response = response.get("message", {}).get("content", "No response from AI")
@@ -89,7 +101,7 @@ def process_text():
                 )
 
                 response = ollama.chat(
-                    model="llama3.2",
+                    model=current_model,
                     messages=[{"role": "user", "content": prompt}]
                 )
                 ai_response = response.get("message", {}).get("content", "No response from AI")
@@ -97,7 +109,7 @@ def process_text():
             elif is_weather_explanation:
                 prompt = f"User asked: '{user_input}'. Provide a simple and friendly explanation."
                 response = ollama.chat(
-                    model="llama3.2",
+                    model=current_model,
                     messages=[{"role": "user", "content": prompt}]
                 )
                 ai_response = response.get("message", {}).get("content", "No response from AI")
@@ -106,7 +118,7 @@ def process_text():
 
         else:
             response = ollama.chat(
-                model="llama3.2",
+                model=current_model,
                 messages=[{"role": "user", "content": user_input}]
             )
             ai_response = response.get("message", {}).get("content", "No response from AI")
