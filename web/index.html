@@ -16,19 +16,20 @@
 
     <section class="hearder-section">
         <header>
-            <div class="logo">
-                <img src="images/logo.png" alt="logo">
-                <h1>LILY</h1>
-            </div>
-            <nav>
-                <a data-page="home" class="nav-btn">HOME</a>
-                <a data-page="setting" class="nav-btn">SETTINGS</a>
-                <a data-page="about" class="nav-btn">ABOUT</a>
-            </nav>
-            <a class="home nav-btn" data-page="home"><img src="images/home.png" alt=""></a>
-            <div>
+            <div class="header-inner">
+                <div class="logo">
+                    <img src="images/logo.png" alt="logo">
+                    <h1>LILY</h1>
+                </div>
+                <nav>
+                    <a data-page="home" class="nav-btn">HOME</a>
+                    <a data-page="setting" class="nav-btn">SETTINGS</a>
+                    <a data-page="about" class="nav-btn">ABOUT</a>
+                </nav>
+                <a class="home nav-btn" data-page="home"><img src="images/home.png" alt=""></a>
                 <button class="sign-in-btn">Sign In</button>
             </div>
+
         </header>
     </section>
     <section class="main-container page" id="home">
@@ -490,7 +491,8 @@
                 </div>
                 <div class="btn-right">
                     <div class="btn-border nav-btn" title="Text Mode" data-page="text-chat">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" id="Keyboard">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32"
+                            id="Keyboard">
                             <path
                                 d="M6.71,10.29A1,1,0,0,0,5,11a1,1,0,1,0,1.92-.38A1,1,0,0,0,6.71,10.29ZM9.29,7.71A1,1,0,0,0,10,8a1,1,0,0,0,.71-.29,1.15,1.15,0,0,0,.21-.33A1,1,0,0,0,11,7a1.05,1.05,0,0,0-.29-.71l-.15-.12-.18-.09A.6.6,0,0,0,10.19,6a1,1,0,0,0-.9.27,1,1,0,0,0-.21.33.94.94,0,0,0,0,.76A1.15,1.15,0,0,0,9.29,7.71ZM6.56,6.17a.76.76,0,0,0-.18-.09L6.2,6a1,1,0,0,0-.91.27,1,1,0,0,0-.21.33.94.94,0,0,0,0,.76,1.15,1.15,0,0,0,.21.33,1.15,1.15,0,0,0,.33.21A.84.84,0,0,0,6,8a1,1,0,0,0,.71-.29,1.15,1.15,0,0,0,.21-.33A1,1,0,0,0,7,7a1.05,1.05,0,0,0-.29-.71Zm6.15,12.12a1,1,0,0,0-1.42,0l-2,2a1,1,0,0,0,1.42,1.42L12,20.41l1.29,1.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Zm6-8a1,1,0,0,0-1.42,0,1,1,0,0,0-.21.33,1,1,0,0,0,1.3,1.3,1.15,1.15,0,0,0,.33-.21A1,1,0,0,0,19,11a.84.84,0,0,0-.08-.38A1,1,0,0,0,18.71,10.29ZM14,10H10a1,1,0,0,0,0,2h4a1,1,0,0,0,0-2Zm6-8H4A3,3,0,0,0,1,5v8a3,3,0,0,0,3,3H20a3,3,0,0,0,3-3V5A3,3,0,0,0,20,2Zm1,11a1,1,0,0,1-1,1H4a1,1,0,0,1-1-1V5A1,1,0,0,1,4,4H20a1,1,0,0,1,1,1ZM17.62,6.08a.93.93,0,0,0-.33.21A1.05,1.05,0,0,0,17,7a1,1,0,0,0,.08.38,1.15,1.15,0,0,0,.21.33A1,1,0,0,0,18,8a1,1,0,0,0,.71-.29,1.15,1.15,0,0,0,.21-.33A1,1,0,0,0,19,7a1.05,1.05,0,0,0-.29-.71A1,1,0,0,0,17.62,6.08Zm-3.06.09-.18-.09L14.2,6a1,1,0,0,0-.58.06.93.93,0,0,0-.33.21,1,1,0,0,0-.21.33.94.94,0,0,0,0,.76,1.15,1.15,0,0,0,.21.33A1,1,0,0,0,14,8a1,1,0,0,0,.71-.29,1.15,1.15,0,0,0,.21-.33A1,1,0,0,0,15,7a1.05,1.05,0,0,0-.29-.71Z"
                                 fill="#8f8f8f" class="color000000 svgShape">
@@ -506,16 +508,13 @@
     <section class="text-chat page" id="text-chat">
         <div class="text-chat-pg">
             <div class="text-chat-pg-content">
-                <div class="text-response-container">
-                    <div id="user-image"></div>
-                    <div id="text-response"></div>
-                </div>
-                <div class="text-input-container">
-                    <textarea id="text-input" placeholder="Type your message here..."></textarea>
-                    <a data-page="home" class="nav-btn" title="Use Voice Mode">
-                        <img src="../icons/voice.png" alt="" class="txt-to-voice-icon">
-                    </a>
-                </div>
+                <div id="chat-messages" class="chat-messages"></div>
+            </div>
+            <div class="text-input-container">
+                <textarea id="text-input" placeholder="Ask Anything"></textarea>
+                <a class="home nav-btn" data-page="home" id="voice-btn" title="Use Voice Mode">
+                    <img src="../icons/voice.png" alt="" class="txt-to-voice-icon">
+                </a>
             </div>
         </div>
     </section>
@@ -685,6 +684,68 @@
                 modelButtons.style.display = 'none';
             }
         }
+    </script>
+    <script>
+        const chatBox = document.getElementById("chat-messages");
+        const input = document.getElementById("text-input");
+
+        function addMessage(text, sender) {
+            const div = document.createElement("div");
+            div.classList.add("message", sender === "user" ? "user-message" : "bot-message");
+
+            div.innerHTML = text
+                .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+                .replace(/\n/g, "<br>");
+
+            chatBox.appendChild(div);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        async function sendMessage() {
+            const text = input.value.trim();
+            if (!text) return;
+            addMessage(text, "user");
+            input.value = "";
+
+            try {
+                let response = await fetch("http://127.0.0.1:5700/process-text", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ text: text }),
+                });
+
+                const data = await response.json();
+                aiResponse = data.response;
+                addMessage(aiResponse, "bot");
+            } catch (err) {
+                addMessage("Error: Could not connect to server.", "bot");
+            }
+        }
+
+        input.addEventListener("keypress", (e) => {
+            if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+    </script>
+    <script>
+        const textarea = document.getElementById("text-input");
+        const lineHeight = 7; // adjust if your line-height differs
+        const maxLines = 5;
+
+        textarea.addEventListener("input", () => {
+            textarea.style.height = "auto"; // reset to shrink when deleting
+            const lines = Math.floor(textarea.scrollHeight / lineHeight);
+
+            if (lines <= maxLines) {
+                textarea.style.overflowY = "hidden";
+                textarea.style.height = textarea.scrollHeight + "px";
+            } else {
+                textarea.style.overflowY = "auto"; // enable scroll
+                textarea.style.height = lineHeight * maxLines + "px";
+            }
+        });
     </script>
 </body>
 
