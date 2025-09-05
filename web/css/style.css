@@ -102,6 +102,8 @@ header {
 
 .home {
     display: none;
+    width: 2rem;
+    height: 2rem;
 }
 
 .logo {
@@ -320,6 +322,7 @@ nav a:hover {
     bottom: 10%;
     display: flex;
     justify-content: space-around;
+    align-items: center;
 }
 
 .btn-middle {
@@ -549,6 +552,10 @@ footer {
     justify-content: center;
 }
 
+#text-chat .text-chat-pg-content {
+    padding-bottom: 20px;
+}
+
 #text-chat .chat-messages::-webkit-scrollbar-thumb {
     background: #c1c1c1;
     border-radius: 4px;
@@ -556,4 +563,74 @@ footer {
 
 #text-chat .chat-messages::-webkit-scrollbar-track {
     background: transparent;
+}
+
+@media (max-width: 480px) {
+    body {
+        height: 50vh;
+    }
+
+    .logo h1 {
+        font-size: 1rem;
+        letter-spacing: 0.3rem;
+    }
+
+    .logo img {
+        width: 2rem;
+        height: 2rem;
+    }
+
+    .logo {
+        width: 100px;
+    }
+
+    nav {
+        display: none;
+    }
+
+    .home {
+        display: flex;
+    }
+
+    .sign-in-btn {
+        width: 80px;
+        height: 30px;
+    }
+
+    .glow-background {
+        width: 400px;
+        height: 400px;
+        filter: blur(40px);
+    }
+
+    .blob-container {
+        width: 400px;
+        height: 400px;
+    }
+
+    .image-gradient {
+        width: 40rem;
+        height: 25rem;
+    }
+
+    .btn-border {
+        width: 3rem;
+        height: 3rem;
+        border: 2px solid #414242;
+    }
+
+    #text-chat .text-input-container {
+        width: 80%;
+        height: 40px;
+        text-align: center;
+        align-self: center
+    }
+
+    #text-chat {
+        padding-top: 130px;
+    }
+
+    #text-chat .text-chat-pg-content {
+        padding-bottom: 20px;
+    }
 }

@@ -1,3 +1,4 @@
+
 const startBtn = document.getElementById("start-chat");
 const stopBtn = document.getElementById("stop-chat");
 const stopSpeech = document.getElementById("stop-speech");
@@ -41,6 +42,7 @@ if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
 
     recognition.onresult = (event) => {
         const transcript = event.results[event.results.length - 1][0].transcript;
+        addMessage(transcript, "user");
         sendToBackend(transcript);
     };
 
@@ -92,6 +94,11 @@ stopBtn.onclick = () => {
     recognition.stop();
 };
 
+
+let speechBuffer = "";
+let speechTimer = null;
+let aiResponseBuffer = "";
+
 async function sendToBackend(text) {
     if (isRequestInProgress) return;
     isRequestInProgress = true;
@@ -99,32 +106,46 @@ async function sendToBackend(text) {
     try {
         console.log("You: ", text);
 
-        let response = await fetch("http://127.0.0.1:5700/process-text", {
+        const response = await fetch("http://127.0.0.1:5700/process-text", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ text: text }),
+            body: JSON.stringify({ text: text, mode: "voice" }),
         });
 
         if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+        if (!response.body) throw new Error("ReadableStream not supported");
 
-        let result = await response.json();
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder("utf-8");
 
-        if (result && result.response) {
-            let aiResponse = result.response;
-            console.log("AI Response:", aiResponse);
-            speakResponse(aiResponse);
+        aiResponseBuffer = "";
+        speechBuffer = "";
+        isSpeaking = true;
+        recognition.stop();
+        stopSpeech.style.display = 'flex';
 
-            if (["bye", "good night"].some(word => aiResponse.toLowerCase().includes(word))) {
-                console.log("AI said 'Bye'. Exiting chat...");
-                isChatting = false;
-                recognition.stop();
+        let done = false;
 
-                stopBtn.style.display = 'none';
-                startBtn.style.display = 'flex';
+        while (!done) {
+            const { value, done: doneReading } = await reader.read();
+            done = doneReading;
+            if (value) {
+                const chunk = decoder.decode(value);
+                aiResponseBuffer += chunk;   
+                speechBuffer += chunk;     
+                scheduleSpeech();                       
             }
-        } else {
-            console.error("Invalid response format:", result);
         }
+
+        // Speak any remaining buffered text
+        if (speechBuffer.trim()) speakBufferedText();
+
+        // After TTS finishes, append full AI response to chatbox
+        utteranceEndCallback = () => {
+            appendToChatBox(aiResponseBuffer, "bot");
+            aiResponseBuffer = "";
+        };
+
     } catch (error) {
         console.error("Error fetching response:", error);
         recognition.stop();
@@ -135,62 +156,71 @@ async function sendToBackend(text) {
     }
 }
 
-function speakResponse(responseText) {
-    const cleanedResponse = responseText.replace(/\*/g, '').replace(/<\/?think>/g, '').trim();
+// Append messages to chat box
+function appendToChatBox(text, sender) {
+    const chatBox = document.getElementById("chat-messages");
+    const div = document.createElement("div");
+    div.classList.add("message", sender === "user" ? "user-message" : "bot-message");
+    div.innerHTML = text.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>").replace(/\n/g, "<br>");
+    chatBox.appendChild(div);
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
 
-    if (isSpeaking) return;
-    isSpeaking = true;
+// Schedule buffered text for speech
+function scheduleSpeech() {
+    if (speechTimer) clearTimeout(speechTimer);
+    speechTimer = setTimeout(speakBufferedText, 500);
+}
 
-    recognition.stop();
-    stopSpeech.style.display = 'flex';
+// Speech synthesis for buffered chunks
+let utteranceEndCallback = null;
 
-    let availableVoices = window.speechSynthesis.getVoices();
+function speakBufferedText() {
+    if (!speechBuffer.trim()) return;
+
+    const textToSpeak = speechBuffer.replace(/\*/g, '').replace(/<\/?think>/g, '').trim();
+    speechBuffer = "";
+
+    const availableVoices = window.speechSynthesis.getVoices();
     const googleUKFemaleVoice = availableVoices.find(voice => voice.name === 'Google UK English Female');
     const defaultVoice = availableVoices.find(voice => voice.lang.includes('en')) || null;
 
-    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(textToSpeak);
+    if (googleUKFemaleVoice) utterance.voice = googleUKFemaleVoice;
+    else if (defaultVoice) utterance.voice = defaultVoice;
 
-    const sentences = cleanedResponse.split(/(?<=[.!?]) +/);
+    utterance.pitch = 1;
+    utterance.rate = 1;
+    utterance.volume = 1;
 
-    function speakChunks(index) {
-        if (index >= sentences.length) {
-            isSpeaking = false;
-            stopSpeech.style.display = 'none';
-            console.log("Finished speaking...");
-
-            setTimeout(() => {
-                if (isChatting) {
-                    getMicrophoneAccess().then(() => recognition.start());
-                }
-            }, 200);
-
-            return;
-        }
-
-        const utterance = new SpeechSynthesisUtterance(sentences[index].trim());
-        if (googleUKFemaleVoice) utterance.voice = googleUKFemaleVoice;
-        else if (defaultVoice) utterance.voice = defaultVoice;
-
-        utterance.pitch = 1;
-        utterance.rate = 1;
-        utterance.volume = 1;
-
-        utterance.onend = () => {
-            speakChunks(index + 1);
-        };
-
-        window.speechSynthesis.speak(utterance);
-    }
-
-    speakChunks(0);
-
-    stopSpeech.onclick = async () => {
-        window.speechSynthesis.cancel();
+    utterance.onend = async () => {
         isSpeaking = false;
         stopSpeech.style.display = 'none';
-        await getMicrophoneAccess();
-        recognition.start();
+
+        // Update chatbox with full response
+        if (utteranceEndCallback) {
+            utteranceEndCallback();
+            utteranceEndCallback = null;
+        }
+
+        // Resume listening
+        if (isChatting) {
+            await getMicrophoneAccess();
+            recognition.start();
+        }
     };
+
+    window.speechSynthesis.speak(utterance);
 }
 
-loadVoices();
+// Stop button
+stopSpeech.onclick = async () => {
+    window.speechSynthesis.cancel();
+    speechBuffer = "";
+    aiResponseBuffer = "";
+    if (speechTimer) clearTimeout(speechTimer);
+    isSpeaking = false;
+    stopSpeech.style.display = 'none';
+    await getMicrophoneAccess();
+    recognition.start();
+};
